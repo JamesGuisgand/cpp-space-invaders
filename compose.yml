@@ -1,0 +1,18 @@
+services:
+  space-invaders:
+    build: .
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: web
+      traefik.http.routers.space-invaders.rule: "Host(`spaceinvader.guisgand-james.fr`)"
+      traefik.http.routers.space-invaders.entrypoints: websecure
+      traefik.http.routers.space-invaders.tls: "true"
+      traefik.http.routers.space-invaders.tls.certresolver: myresolver
+      traefik.http.routers.space-invaders.service: space-invaders
+      traefik.http.services.space-invaders.loadbalancer.server.port: "80"
+networks:
+  web:
+    external: true

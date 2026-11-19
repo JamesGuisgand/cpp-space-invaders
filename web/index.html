@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1225">
+  <title>Space Invaders — James Guisgand</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="engine.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body data-mode="enhanced">
+  <main class="cabinet">
+    <header>
+      <h1>Space Invaders</h1>
+      <div class="record">RECORD <b id="best">0</b></div>
+    </header>
+    <div class="stage">
+      <canvas id="field" width="640" height="720" aria-label="Aire de jeu"></canvas>
+      <div id="hud" class="hud" hidden><span>SCORE <b id="score">0</b></span><span>VAGUE <b id="wave">1</b></span><span>VIES <b id="lives">3</b></span></div>
+      <section id="menu" class="overlay" aria-labelledby="title">
+        <div class="panel">
+          <h2 id="title">Prêt à décoller ?</h2>
+          <p id="status" role="status">Chargement du moteur…</p>
+          <fieldset id="graphics">
+            <legend>Mode graphique</legend>
+            <label><input type="radio" name="mode" value="classic"><span>Classique</span></label>
+            <label><input type="radio" name="mode" value="enhanced" checked><span>Graphique ++</span></label>
+          </fieldset>
+          <button id="play" disabled>Jouer <span aria-hidden="true">↵</span></button>
+        </div>
+      </section>
+      <button id="pause" class="pause" hidden>Pause</button>
+    </div>
+    <footer><span>Flèches ou ZQSD · Déplacer</span><span>Espace · Tirer</span><span>Échap · Pause</span></footer>
+    <div class="touch" aria-label="Commandes tactiles">
+      <button data-key="ArrowLeft" aria-label="Gauche">←</button>
+      <button data-key="ArrowUp" aria-label="Haut">↑</button>
+      <button data-key="ArrowDown" aria-label="Bas">↓</button>
+      <button data-key="ArrowRight" aria-label="Droite">→</button>
+      <button data-key="Space">Tirer</button>
+    </div>
+  </main>
+</body>
+</html>

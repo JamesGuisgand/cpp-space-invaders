@@ -1,0 +1,16 @@
+name: Build browser edition
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  web:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t space-invaders-web .
+      - run: docker compose config --quiet
+      - name: Serve and check the HTTP response
+        run: |
+          docker run -d --name invaders-test -p 127.0.0.1:8000:80 space-invaders-web
+          curl -fsS --retry 5 --retry-connrefused http://127.0.0.1:8000/ | grep -F "Graphique ++"
+          curl -fsSI http://127.0.0.1:8000/engine.wasm | tr -d '\r' | grep -i '^Content-Type: application/wasm$'
